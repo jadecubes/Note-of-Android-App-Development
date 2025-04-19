@@ -3,7 +3,7 @@ We use question asking to explore the topic.
 ## Questions and Answers
 
 
-### What's the basic knowledge about state setting in Android app development?
+### Q: What's the basic knowledge about state setting in Android app development?
 Official document: https://developer.android.com/develop/ui/compose/state
 1. 🔥 Default to rememberSaveable, and elevate to ViewModel when state needs to be shared or orchestrated.
 2. 
@@ -14,7 +14,7 @@ rememberSaveable { ... }      | localStorage + useState | Persists on reload
 ViewModel + StateFlow         | Redux / Context         | Persists as long as global
 ```
 
-### How to code when a component uses multiple ViewModel configurations?
+### Q: How to code when a component uses multiple ViewModel configurations?
 🧩 Scenario:
 
 You're building a CouponScreen that handles:
