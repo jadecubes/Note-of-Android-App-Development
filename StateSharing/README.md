@@ -3,7 +3,7 @@ We use question asking to explore the topic.
 ## Questions and Answers
 
 
-### Q: What's the basic knowledge about state setting in Android app development?
+### Q1: What's the basic knowledge about state setting in Android app development?
 Official document: https://developer.android.com/develop/ui/compose/state
 1. 🔥 Default to rememberSaveable, and elevate to ViewModel when state needs to be shared or orchestrated.
 2. 
@@ -14,7 +14,7 @@ rememberSaveable { ... }      | localStorage + useState | Persists on reload
 ViewModel + StateFlow         | Redux / Context         | Persists as long as global
 ```
 
-### Q: How to code when a component uses multiple ViewModel configurations?
+### Q2: How to code when a component uses multiple ViewModel configurations?
 🧩 Scenario:
 
 You're building a CouponScreen that handles:
@@ -25,7 +25,7 @@ You're building a CouponScreen that handles:
 
     TimerViewModel
 - Define each ViewModel
-```
+```kotlin
 class CouponFormViewModel : ViewModel() {
     var couponCode by mutableStateOf("")
     fun updateCode(newCode: String) {
@@ -48,7 +48,7 @@ class TimerViewModel : ViewModel() {
 }
 ```
 - Group into a UI-level container
-```
+```kotlin
 data class CouponScreenViewModels(
     val couponFormViewModel: CouponFormViewModel,
     val validationViewModel: ValidationViewModel,
@@ -56,7 +56,7 @@ data class CouponScreenViewModels(
 )
 ```
 - In your screen-level @Composable
-```
+```kotlin
 @Composable
 fun CouponScreen() {
     val couponFormVM = viewModel<CouponFormViewModel>()
@@ -75,7 +75,7 @@ fun CouponScreen() {
 }
 ```
 - In your CouponContent
-```
+```kotlin
 @Composable
 fun CouponContent(viewModels: CouponScreenViewModels) {
     val couponCode by viewModels.couponFormViewModel.couponCode
