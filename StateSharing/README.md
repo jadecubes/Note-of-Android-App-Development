@@ -104,3 +104,27 @@ fun CouponContent(viewModels: CouponScreenViewModels) {
 
     If your value is globally relevant (e.g. Theme, UserSession, Locale, ViewModel in many places) → use CompositionLocal
 ```
+#### Sample Code of compositionLocalOf
+```kotlin
+val LocalMyVM = compositionLocalOf<MyViewModel> { error("Not Provided") }
+
+@Composable
+fun Parent() {
+    val viewModel = viewModel<MyViewModel>()
+    CompositionLocalProvider(LocalMyVM provides viewModel) {
+        Child1()
+    }
+}
+
+@Composable
+fun Child1() {
+    Child2() // ✅ no need to pass props
+}
+
+@Composable
+fun Child2() {
+    val vm = LocalMyVM.current
+    Text(vm.name)
+}
+
+```
