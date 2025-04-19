@@ -96,4 +96,11 @@ fun CouponContent(viewModels: CouponScreenViewModels) {
         Text("Time Left: $secondsLeft sec")
     }
 }
-```  
+```
+```
+📌 Best Practice
+
+    If your value is only needed in one or two composables → use props (possibly grouped in a data class)
+
+    If your value is globally relevant (e.g. Theme, UserSession, Locale, ViewModel in many places) → use CompositionLocal
+```
