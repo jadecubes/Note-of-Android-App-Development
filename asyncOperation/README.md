@@ -24,7 +24,7 @@ suspend fun loadUserName(): String {
 
 ```
 or blocking version: 
-```
+```kotlin
 fun main() = runBlocking {
     val name = loadUserName() // suspending call, but runBlocking blocks the main thread
     println("Loaded name: $name")
