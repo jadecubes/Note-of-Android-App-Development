@@ -9,19 +9,24 @@ fetchUserAsync()
     .then(scope) { user -> fetchProfile(user.id) }
     .then(scope) { profile -> profile.name }
 ```
-Kotlin version,
+Kotlin non-blocking version,
 ```kotlin
 suspend fun loadUserName(): String {
-    val user = fetchUser()
-    val profile = fetchProfile(user.id)
-    return profile.name
+    return try {
+        val user = fetchUser() // suspends here if needed
+        val profile = fetchProfile(user.id) // suspends here if needed
+        profile.name
+    } catch (e: Exception) {
+        println("Error occurred: ${e.message}")
+        "Unknown User"
+    }
 }
+
 ```
-Or, with suspend functions:
-```kotlin
-suspend fun loadUserName(): String {
-    val user = fetchUser()
-    val profile = fetchProfile(user.id)
-    return profile.name
+or blocking version: 
+```
+fun main() = runBlocking {
+    val name = loadUserName() // suspending call, but runBlocking blocks the main thread
+    println("Loaded name: $name")
 }
 ```
